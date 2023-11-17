@@ -27,3 +27,12 @@ from .artifact_commit_from_tag_pushed import ArtifactCommitFromTagPushed
 from .artifact_commit_push import ArtifactCommitPush
 from .artifact_commit_tag import ArtifactCommitTag
 from .artifact_tag_push import ArtifactTagPush
+from .local_artifact_artifact import LocalArtifactArtifact
+
+# regular flow:
+# 1. TagPush
+# 2. ArtifactCommitFromTagPushed
+# 3. ArtifactCommitPush
+# 4. ArtifactCommitTag
+# 5. ArtifactTagPush
+# 6. ArtifactCommitFromArtifactTagPushed

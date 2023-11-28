@@ -27,6 +27,7 @@ from .artifact_commit_from_tag_pushed import ArtifactCommitFromTagPushed
 from .artifact_commit_push import ArtifactCommitPush
 from .artifact_commit_tag import ArtifactCommitTag
 from .artifact_tag_push import ArtifactTagPush
+from .artifact_artifact import ArtifactArtifact
 from .local_artifact_artifact import LocalArtifactArtifact
 
 # regular flow:

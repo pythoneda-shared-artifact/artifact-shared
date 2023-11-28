@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from pythoneda.shared.artifact import ArtifactEventListener
-from pythoneda.shared.artifact.events.artifact import (
+from pythoneda.shared.artifact.artifact.events import (
     ArtifactCommitPushed,
     ArtifactCommitTagged,
 )
@@ -35,8 +35,8 @@ class ArtifactCommitTag(ArtifactEventListener):
         - React to ArtifactCommitPushed events.
 
     Collaborators:
-        - pythoneda.shared.artifact.events.artifact.ArtifactCommitPushed
-        - pythoneda.shared.artifact.events.CommittedChangesPushed
+        - pythoneda.shared.artifact.artifact.events.ArtifactCommitPushed
+        - pythoneda.shared.artifact.artifact.events.ArtifactCommitTagged
     """
 
     def __init__(self, folder: str):
@@ -52,9 +52,9 @@ class ArtifactCommitTag(ArtifactEventListener):
         """
         Gets notified of an ArtifactCommitPushed event.
         :param event: The event.
-        :type event: pythoneda.shared.artifact.events.artifact.ArtifactCommitPushed
+        :type event: pythoneda.shared.artifact.artifact.events.ArtifactCommitPushed
         :return: An event notifying the commit in the artifact repository has been tagged.
-        :rtype: pythoneda.shared.artifact.events.artifact.ArtifactCommitTagged
+        :rtype: pythoneda.shared.artifact.artifact.events.ArtifactCommitTagged
         """
         result = None
         ArtifactCommitTag.logger().debug(f"Received {event}")
@@ -65,9 +65,9 @@ class ArtifactCommitTag(ArtifactEventListener):
         """
         Tags an artifact repository.
         :param event: The event.
-        :type event: pythoneda.shared.artifact.events.artifact.ArtifactCommitPushed
+        :type event: pythoneda.shared.artifact.artifact.events.ArtifactCommitPushed
         :return: An event notifying the commit in the artifact repository has been tagged.
-        :rtype: pythoneda.shared.artifact.events.artifact.ArtifactCommitTagged
+        :rtype: pythoneda.shared.artifact.artifact.events.ArtifactCommitTagged
         """
         if not self.enabled:
             return None

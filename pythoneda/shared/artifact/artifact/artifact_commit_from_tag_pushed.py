@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import os
 from pythoneda.shared.artifact import ArtifactEventListener
 from pythoneda.shared.artifact.events import Change, TagPushed
-from pythoneda.shared.artifact.events.artifact import ArtifactChangesCommitted
+from pythoneda.shared.artifact.artifact.events import ArtifactChangesCommitted
 from pythoneda.shared.git import (
     GitAdd,
     GitAddFailed,
@@ -43,7 +43,7 @@ class ArtifactCommitFromTagPushed(ArtifactEventListener):
 
     Collaborators:
         - pythoneda.shared.artifact.events.TagPushed
-        - pythoneda.shared.artifact.events.artifact.ArtifactChangesCommitted
+        - pythoneda.shared.artifact.artifact.events.ArtifactChangesCommitted
     """
 
     def __init__(self, folder: str):
@@ -62,7 +62,7 @@ class ArtifactCommitFromTagPushed(ArtifactEventListener):
         :param event: The event.
         :type event: pythoneda.shared.artifact.events.TagPushed
         :return: An event notifying the changes in the artifact have been committed.
-        :rtype: pythoneda.shared.artifact.events.artifact.ArtifactChangesCommitted
+        :rtype: pythoneda.shared.artifact.artifact.events.ArtifactChangesCommitted
         """
         if not self.enabled:
             return None
@@ -79,7 +79,7 @@ class ArtifactCommitFromTagPushed(ArtifactEventListener):
         :param event: The event.
         :type event: pythoneda.shared.artifact.events.TagPushed
         :return: An event notifying the changes in the artifact have been committed.
-        :rtype: pythoneda.shared.artifact.events.artifact.ArtifactChangesCommitted
+        :rtype: pythoneda.shared.artifact.artifact.events.ArtifactChangesCommitted
         """
         result = None
         artifact_repo = None

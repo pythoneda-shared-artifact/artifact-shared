@@ -18,9 +18,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from pythoneda.shared.artifact import Artifact, ArtifactEventListener
+from pythoneda.shared.artifact import AbstractArtifact, ArtifactEventListener
 from pythoneda.shared.artifact.events import Change
-from pythoneda.shared.artifact.events.artifact import (
+from pythoneda.shared.artifact.artifact.events import (
     ArtifactChangesCommitted,
     ArtifactTagPushed,
 )
@@ -48,7 +48,8 @@ class ArtifactCommitFromArtifactTagPushed(ArtifactEventListener):
         - Receive ArtifactTagPushed events and react accordingly.
 
     Collaborators:
-        - pythoneda.shared.artifact.events.artifact.ArtifactTagPushed
+        - pythoneda.shared.artifact.events.artifact.artifact.ArtifactChangesCommitted
+        - pythoneda.shared.artifact.events.artifact.artifact.ArtifactTagPushed
     """
 
     def __init__(self, folder: str):
@@ -61,7 +62,7 @@ class ArtifactCommitFromArtifactTagPushed(ArtifactEventListener):
         self._enabled = True
 
     async def listen(
-        self, event: ArtifactTagPushed, artifact: Artifact
+        self, event: ArtifactTagPushed, artifact: AbstractArtifact
     ) -> ArtifactChangesCommitted:
         """
         Reacts upon given ArtifactTagPushed event to check if affects any of its dependencies.
@@ -69,9 +70,9 @@ class ArtifactCommitFromArtifactTagPushed(ArtifactEventListener):
         :param event: The event.
         :type event: pythoneda.shared.artifact.events.artifact.ArtifactTagPushed
         :param artifact: The artifact instance.
-        :type artifact: pythoneda.shared.artifact.Artifact
+        :type artifact: pythoneda.shared.artifact.AbstractArtifact
         :return: An event representing the commit.
-        :rtype: pythoneda.shared.artifact.events.artifact.ArtifactChangesCommitted
+        :rtype: pythoneda.shared.artifact.artifact.events.ArtifactChangesCommitted
         """
         if not self.enabled:
             return None

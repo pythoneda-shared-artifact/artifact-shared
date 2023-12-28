@@ -19,7 +19,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from pythoneda.shared.artifact import ArtifactEventListener
-from pythoneda.shared.artifact.events import Change
 from pythoneda.shared.artifact.artifact.events import (
     ArtifactChangesCommitted,
     ArtifactCommitPushed,
@@ -74,7 +73,6 @@ class ArtifactCommitPush(ArtifactEventListener):
         :return: An event notifying the commit in the artifact repository has been pushed.
         :rtype: pythoneda.shared.artifact.artifact.events.ArtifactCommitPushed
         """
-        result = None
         try:
             GitPush(event.change.repository_folder).push()
             result = ArtifactCommitPushed(event.change, event.commit, event.id)

@@ -56,7 +56,6 @@ class ArtifactCommitTag(ArtifactEventListener):
         :return: An event notifying the commit in the artifact repository has been tagged.
         :rtype: pythoneda.shared.artifact.artifact.events.ArtifactCommitTagged
         """
-        result = None
         ArtifactCommitTag.logger().debug(f"Received {event}")
         result = await self.tag_artifact(event)
         return result

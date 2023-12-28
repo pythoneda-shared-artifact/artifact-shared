@@ -66,7 +66,6 @@ class ArtifactCommitFromTagPushed(ArtifactEventListener):
         """
         if not self.enabled:
             return None
-        result = None
         ArtifactCommitFromTagPushed.logger().debug(f"Received {event}")
         result = await self.update_artifact_version(event)
         return result
@@ -93,11 +92,11 @@ class ArtifactCommitFromTagPushed(ArtifactEventListener):
                 # update the version and hash in the flake of the artifact repository
                 version_updated = await self.update_version_in_flake(event.tag, flake)
                 if version_updated:
-                    hash, change = await self.commit_artifact_changes(
+                    hash_value, change = await self.commit_artifact_changes(
                         flake, event.repository_url, event.tag
                     )
                     if hash:
-                        result = ArtifactChangesCommitted(change, hash, event.id)
+                        result = ArtifactChangesCommitted(change, hash_value, event.id)
 
         return result
 
@@ -171,8 +170,6 @@ class ArtifactCommitFromTagPushed(ArtifactEventListener):
     ):
         """
         Commits the changes in the artifact repository.
-        :param artifactRepoFolder: The folder where the artifact repository is cloned.
-        :type artifactRepoFolder: str
         :param flake: The flake.nix file.
         :type flake: str
         :param domainRepoUrl: The url of the domain repository.
@@ -185,12 +182,12 @@ class ArtifactCommitFromTagPushed(ArtifactEventListener):
         result = (None, None)
         try:
             GitAdd(self.repository_folder).add(flake)
-            hash, diff = GitCommit(self.repository_folder).commit(
+            hash_value, diff = GitCommit(self.repository_folder).commit(
                 f"New tag {domainTag} in {domainRepoUrl}"
             )
             repo = GitRepo.from_folder(self.repository_folder)
             result = (
-                hash,
+                hash_value,
                 Change.from_unidiff_text(
                     diff, repo.url, repo.rev, self.repository_folder
                 ),

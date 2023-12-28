@@ -38,7 +38,6 @@ from pythoneda.shared.artifact.artifact.events import (
 from pythoneda.shared.artifact.events import (
     TagPushed,
 )
-from pythoneda.shared.git import GitTag
 from typing import Callable, List
 
 

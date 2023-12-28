@@ -18,6 +18,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+import os
+
 from pythoneda.shared.artifact import AbstractArtifact, ArtifactEventListener
 from pythoneda.shared.artifact.events import Change
 from pythoneda.shared.artifact.artifact.events import (
@@ -30,11 +32,6 @@ from pythoneda.shared.git import (
     GitCommit,
     GitCommitFailed,
     GitRepo,
-)
-from pythoneda.shared.nix_flake import (
-    FlakeUtilsNixFlake,
-    License,
-    PythonedaSharedPythonedaBannerNixFlake,
 )
 
 
@@ -93,7 +90,6 @@ class ArtifactCommitFromArtifactTagPushed(ArtifactEventListener):
                 f"Updating {org}/{repo} since {input_name} updated to version {event.version}"
             )
             # update the affected dependency
-            updated_dep = dep.for_version(event.version)
             # generate the flake
             self.generate_flake(artifact.repository_folder)
             # refresh flake.lock

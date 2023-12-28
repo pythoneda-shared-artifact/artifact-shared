@@ -57,7 +57,6 @@ class ArtifactTagPush(ArtifactEventListener):
         :return: An event notifying the tag in the artifact has been pushed.
         :rtype: pythoneda.shared.artifact.artifact.events.ArtifactTagPushed
         """
-        result = None
         ArtifactTagPush.logger().debug(f"Received {event}")
         result = await self.push_tag_artifact(event)
         return result

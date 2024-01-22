@@ -67,7 +67,7 @@ class ArtifactArtifact(AbstractArtifact, abc.ABC):
         :param urlFor: The function to obtain the url of the artifact for a given version.
         :type urlFor: Callable[[str],str]
         :param inputs: The flake inputs.
-        :type inputs: List[pythoneda.shared.nix_flake.NixFlakeInput]
+        :type inputs: List[pythoneda.shared.nix.flake.NixFlakeInput]
         :param templateSubfolder: The template subfolder, if any.
         :type templateSubfolder: str
         :param description: The flake description.
@@ -166,6 +166,8 @@ class ArtifactArtifact(AbstractArtifact, abc.ABC):
         :rtype: pythoneda.shared.artifact_changes.events.ArtifactChangesCommitted
         """
         pass
+
+
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
 # Local Variables:
 # mode: python
